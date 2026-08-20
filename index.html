@@ -51,7 +51,7 @@
     <nav id="nav"></nav>
     <section class="slide on" data-slide="Title">
       <h1>WhatsApp delivery platform</h1>
-      <p class="lead">How Evolution, Chatwoot, Dify, n8n, and OpenProject turn WhatsApp messages into tracked work.</p>
+      <p class="lead">Evolution, Chatwoot, Dify, n8n, and OpenProject are the live path. Odoo, Nextcloud, Open WebUI, OpenClaw, and Netdata are already on the same server.</p>
       <div class="stats">
         <div class="stat"><b>1</b><span>WhatsApp gateway</span></div>
         <div class="stat"><b>2</b><span>Inbox</span></div>
@@ -59,7 +59,7 @@
         <div class="stat"><b>4</b><span>AI understanding</span></div>
         <div class="stat"><b>5</b><span>Task source of truth</span></div>
       </div>
-      <div class="note"><strong>One rule:</strong> Dify understands. n8n executes. OpenProject tracks.</div>
+      <div class="note"><strong>One rule:</strong> Dify understands. n8n executes. OpenProject tracks. Do not add a second WhatsApp API on the same number.</div>
       <table>
         <tr><th>Layer</th><th>Product</th><th>Job</th></tr>
         <tr><td>In</td><td>Evolution</td><td>Connect the WhatsApp phone, send and receive raw messages</td></tr>
@@ -67,6 +67,11 @@
         <tr><td>Run</td><td>n8n</td><td>Webhooks, decision gates, create or update tasks, replies</td></tr>
         <tr><td>Think</td><td>Dify</td><td>Triage, extract work-package JSON, draft Arabic replies</td></tr>
         <tr><td>Track</td><td>OpenProject</td><td>Work packages, boards, status — the system of record</td></tr>
+        <tr><td>ERP</td><td>Odoo</td><td>Clinic / company operations on drpaws.ai</td></tr>
+        <tr><td>Files</td><td>Nextcloud</td><td>Project docs and knowledge for Dify</td></tr>
+        <tr><td>Local AI</td><td>Open WebUI</td><td>Chat against Ollama on this machine</td></tr>
+        <tr><td>Agent UI</td><td>OpenClaw</td><td>Second agent console — not a second WhatsApp login</td></tr>
+        <tr><td>Health</td><td>Netdata</td><td>Server CPU, RAM, disk, containers</td></tr>
       </table>
     </section>
 
@@ -148,6 +153,49 @@
       </div>
     </section>
 
+    <section class="slide" data-slide="Odoo">
+      <h1>Odoo — ERP and clinic</h1>
+      <p class="lead">Business operations live here: Pet Spot production, test, Sabry site, and Haram POS. Dify may use Odoo for ERP context; it does not replace OpenProject for tasks.</p>
+      <div class="row">
+        <a class="open primary" href="https://drpaws.ai" target="_blank" rel="noopener">Open Odoo (prod)</a>
+        <a class="open" href="https://test.drpaws.ai" target="_blank" rel="noopener">Test</a>
+        <a class="open" href="https://sabry.drpaws.ai" target="_blank" rel="noopener">Sabry site</a>
+        <a class="open" href="https://pos.drpaws.ai" target="_blank" rel="noopener">Haram POS</a>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="Nextcloud">
+      <h1>Nextcloud — files and knowledge</h1>
+      <p class="lead">Project documents, group-project map, and files Dify / Cursor can read. This is the document store, not the inbox and not the task board.</p>
+      <div class="row">
+        <a class="open primary" href="https://nextcloud.drpaws.ai" target="_blank" rel="noopener">Open Nextcloud</a>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="AI">
+      <h1>Open WebUI — local AI chat</h1>
+      <p class="lead">Chat against Ollama on this server. Use it for local experiments. Production WhatsApp triage stays on Dify + n8n.</p>
+      <div class="row">
+        <a class="open primary" href="https://ai.drpaws.ai" target="_blank" rel="noopener">Open Open WebUI</a>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="OpenClaw">
+      <h1>OpenClaw — agent console</h1>
+      <p class="lead">Control UI for the OpenClaw gateway. Keep it off the same WhatsApp number as Evolution. Dual login on one phone breaks the inbox path.</p>
+      <div class="row">
+        <a class="open primary" href="https://openclaw.drpaws.ai" target="_blank" rel="noopener">Open OpenClaw</a>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="Monitor">
+      <h1>Netdata — server health</h1>
+      <p class="lead">CPU, RAM, disk, and container health on master. This hostname is Tailscale DNS, not the Cloudflare tunnel — use it from a machine on Tailscale.</p>
+      <div class="row">
+        <a class="open primary" href="https://monitor.drpaws.ai" target="_blank" rel="noopener">Open Netdata</a>
+      </div>
+    </section>
+
     <section class="slide" data-slide="Open all">
       <h1>Open every console</h1>
       <p class="lead">Use these public links during the demo. Localhost is the fallback on this machine.</p>
@@ -158,6 +206,11 @@
         <tr><td>Dify</td><td><a href="https://dify.drpaws.ai/apps" target="_blank" rel="noopener">https://dify.drpaws.ai/apps</a></td></tr>
         <tr><td>n8n</td><td><a href="https://automation.drpaws.ai" target="_blank" rel="noopener">https://automation.drpaws.ai</a></td></tr>
         <tr><td>OpenProject</td><td><a href="https://projects.drpaws.ai" target="_blank" rel="noopener">https://projects.drpaws.ai</a></td></tr>
+        <tr><td>Odoo</td><td><a href="https://drpaws.ai" target="_blank" rel="noopener">https://drpaws.ai</a></td></tr>
+        <tr><td>Nextcloud</td><td><a href="https://nextcloud.drpaws.ai" target="_blank" rel="noopener">https://nextcloud.drpaws.ai</a></td></tr>
+        <tr><td>Open WebUI</td><td><a href="https://ai.drpaws.ai" target="_blank" rel="noopener">https://ai.drpaws.ai</a></td></tr>
+        <tr><td>OpenClaw</td><td><a href="https://openclaw.drpaws.ai" target="_blank" rel="noopener">https://openclaw.drpaws.ai</a></td></tr>
+        <tr><td>Netdata</td><td><a href="https://monitor.drpaws.ai" target="_blank" rel="noopener">https://monitor.drpaws.ai</a></td></tr>
       </table>
       <div class="row">
         <a class="open primary" href="https://evolution.drpaws.ai/manager" target="_blank" rel="noopener">Evolution</a>
@@ -165,6 +218,11 @@
         <a class="open primary" href="https://dify.drpaws.ai/apps" target="_blank" rel="noopener">Dify</a>
         <a class="open primary" href="https://automation.drpaws.ai" target="_blank" rel="noopener">n8n</a>
         <a class="open primary" href="https://projects.drpaws.ai" target="_blank" rel="noopener">OpenProject</a>
+        <a class="open primary" href="https://drpaws.ai" target="_blank" rel="noopener">Odoo</a>
+        <a class="open primary" href="https://nextcloud.drpaws.ai" target="_blank" rel="noopener">Nextcloud</a>
+        <a class="open primary" href="https://ai.drpaws.ai" target="_blank" rel="noopener">Open WebUI</a>
+        <a class="open primary" href="https://openclaw.drpaws.ai" target="_blank" rel="noopener">OpenClaw</a>
+        <a class="open primary" href="https://monitor.drpaws.ai" target="_blank" rel="noopener">Netdata</a>
       </div>
     </section>
   </div>
