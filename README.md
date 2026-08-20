@@ -1,5 +1,7 @@
-# WhatsApp delivery platform
+# Evolution · Chatwoot · Dify · n8n · OpenProject
 
-Live page: https://sabryyoussef.github.io/platform-stack-presentation/
+Live page: https://sabryyoussef.github.io/evolution-chatwoot-dify-n8n-openproject/
 
-Slide deck for Evolution, Chatwoot, Dify, n8n, and OpenProject.
+Slide deck that opens each console and explains the WhatsApp path:
+
+WhatsApp → Evolution → Chatwoot → n8n → Dify → OpenProject
