@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhatsApp delivery platform</title>
+  <style>
+    :root {
+      --bg: #111318;
+      --panel: #1b1e26;
+      --text: #e8eaed;
+      --muted: #9aa0a6;
+      --line: #2c313c;
+      --accent: #3d7eff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 18px/1.45 system-ui, sans-serif; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 32px 80px; }
+    nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 28px; }
+    nav button, .open {
+      appearance: none; border: 1px solid var(--line); background: var(--panel);
+      color: var(--text); padding: 8px 12px; border-radius: 999px; cursor: pointer; text-decoration: none; font: inherit;
+    }
+    nav button.active, .open.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    nav .spacer { flex: 1; }
+    h1 { font-size: 40px; font-weight: 650; margin: 0 0 12px; letter-spacing: -0.03em; }
+    h2 { font-size: 22px; font-weight: 600; margin: 28px 0 10px; }
+    p { color: var(--muted); margin: 0 0 14px; }
+    .lead { font-size: 20px; color: var(--text); max-width: 42em; }
+    .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 24px 0; }
+    .stat { background: var(--panel); border: 1px solid var(--line); padding: 16px; border-radius: 10px; }
+    .stat b { display: block; font-size: 28px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-size: 13px; font-weight: 600; }
+    a { color: var(--accent); }
+    .note { border: 1px solid var(--line); background: var(--panel); padding: 14px 16px; border-radius: 10px; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 24px; }
+    .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 24px 0; }
+    .box { background: var(--panel); border: 1px solid var(--line); padding: 10px 14px; border-radius: 8px; }
+    .arrow { color: var(--muted); }
+    .slide { display: none; }
+    .slide.on { display: block; }
+    .hint { position: fixed; bottom: 16px; right: 20px; color: var(--muted); font-size: 13px; }
+    code { font-family: ui-monospace, monospace; font-size: 0.92em; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav id="nav"></nav>
+    <section class="slide on" data-slide="Title">
+      <h1>WhatsApp delivery platform</h1>
+      <p class="lead">How Evolution, Chatwoot, Dify, n8n, and OpenProject turn WhatsApp messages into tracked work.</p>
+      <div class="stats">
+        <div class="stat"><b>1</b><span>WhatsApp gateway</span></div>
+        <div class="stat"><b>2</b><span>Inbox</span></div>
+        <div class="stat"><b>3</b><span>Orchestrator</span></div>
+        <div class="stat"><b>4</b><span>AI understanding</span></div>
+        <div class="stat"><b>5</b><span>Task source of truth</span></div>
+      </div>
+      <div class="note"><strong>One rule:</strong> Dify understands. n8n executes. OpenProject tracks.</div>
+      <table>
+        <tr><th>Layer</th><th>Product</th><th>Job</th></tr>
+        <tr><td>In</td><td>Evolution</td><td>Connect the WhatsApp phone, send and receive raw messages</td></tr>
+        <tr><td>Inbox</td><td>Chatwoot</td><td>Conversations, labels, agents, customer history</td></tr>
+        <tr><td>Run</td><td>n8n</td><td>Webhooks, decision gates, create or update tasks, replies</td></tr>
+        <tr><td>Think</td><td>Dify</td><td>Triage, extract work-package JSON, draft Arabic replies</td></tr>
+        <tr><td>Track</td><td>OpenProject</td><td>Work packages, boards, status — the system of record</td></tr>
+      </table>
+    </section>
+
+    <section class="slide" data-slide="Flow">
+      <h1>Production path</h1>
+      <p class="lead">A message on WhatsApp is captured, analyzed, and either becomes an OpenProject work package or a short Arabic reply.</p>
+      <div class="flow">
+        <span class="box">WhatsApp</span><span class="arrow">→</span>
+        <span class="box">Evolution</span><span class="arrow">→</span>
+        <span class="box">Chatwoot</span><span class="arrow">→</span>
+        <span class="box">n8n ingest</span><span class="arrow">→</span>
+        <span class="box">Dify</span><span class="arrow">→</span>
+        <span class="box">n8n execute</span><span class="arrow">→</span>
+        <span class="box">OpenProject</span>
+      </div>
+      <table>
+        <tr><th>Step</th><th>Owner</th><th>Result</th></tr>
+        <tr><td>Phone connects</td><td>Evolution</td><td>QR login, instance health, inbound WhatsApp</td></tr>
+        <tr><td>Message lands</td><td>Chatwoot</td><td>Conversation in inbox 2, labels, agent view</td></tr>
+        <tr><td>Webhook fires</td><td>n8n chatwoot-ai-analysis</td><td>Payload sent to Dify, then a decision gate</td></tr>
+        <tr><td>Understand</td><td>Dify</td><td>Project, type, WP draft JSON, missing fields</td></tr>
+        <tr><td>Act</td><td>n8n</td><td>Create/update/comment WP, optional WhatsApp reply</td></tr>
+        <tr><td>Record</td><td>OpenProject</td><td>WhatsApp Queue (project 14) or mapped client project</td></tr>
+      </table>
+    </section>
+
+    <section class="slide" data-slide="Evolution">
+      <h1>Evolution — WhatsApp gateway</h1>
+      <p class="lead">Evolution is the phone connection, not the inbox. Use it to scan QR, check instance status, and set webhooks. Instance: <code>sabry min</code>.</p>
+      <div class="row">
+        <a class="open primary" href="https://evolution.drpaws.ai/manager" target="_blank" rel="noopener">Open Evolution Manager</a>
+        <a class="open" href="https://evolution.drpaws.ai/docs" target="_blank" rel="noopener">API docs</a>
+      </div>
+      <h2>Open this UI when</h2>
+      <p>Reconnect WhatsApp after the phone logged out.</p>
+      <p>Confirm the instance is connected before blaming Chatwoot.</p>
+      <p>Point the webhook at n8n Evolution WhatsApp Webhook.</p>
+    </section>
+
+    <section class="slide" data-slide="Chatwoot">
+      <h1>Chatwoot — the inbox</h1>
+      <p class="lead">Where humans and automation see the same conversation. Account 2, inbox 2. Labels such as <code>dev-needed</code>, <code>cyclex</code>, <code>ai-create-wp</code> drive n8n.</p>
+      <div class="row">
+        <a class="open primary" href="https://inbox.drpaws.ai/app/accounts/2/dashboard" target="_blank" rel="noopener">Open Chatwoot</a>
+      </div>
+      <h2>Open this UI when</h2>
+      <p>Read a client thread, add a label, assign an agent.</p>
+      <p>Check why n8n did not fire (missing label or inbox).</p>
+      <p>Configure the WhatsApp inbox webhook into n8n.</p>
+    </section>
+
+    <section class="slide" data-slide="n8n">
+      <h1>n8n — the orchestrator</h1>
+      <p class="lead">n8n is the only layer allowed to execute. It receives Chatwoot webhooks, calls Dify, then creates OpenProject work packages and optionally replies on WhatsApp.</p>
+      <div class="row">
+        <a class="open primary" href="https://automation.drpaws.ai" target="_blank" rel="noopener">Open n8n</a>
+        <a class="open" href="https://automation.drpaws.ai/workflow/7lFWUdCXUKxJljCa" target="_blank" rel="noopener">chatwoot-ai-analysis</a>
+      </div>
+      <div class="note"><strong>Do not fire production webhooks in a demo.</strong> Opening the editor is safe. Triggering the workflow creates real work packages.</div>
+    </section>
+
+    <section class="slide" data-slide="Dify">
+      <h1>Dify — AI understanding</h1>
+      <p class="lead">Dify classifies the message, picks the project, extracts OpenProject fields, and drafts a short Arabic reply. It does not create tasks. n8n consumes its JSON.</p>
+      <div class="row">
+        <a class="open primary" href="https://dify.drpaws.ai/apps" target="_blank" rel="noopener">Open Dify Studio</a>
+        <a class="open" href="https://dify.drpaws.ai/app/5a71ccd1-6db9-4ae3-826d-a0ef491b556b/workflow" target="_blank" rel="noopener">Platform Copilot</a>
+      </div>
+      <h2>Open this UI when</h2>
+      <p>Tune triage prompts, knowledge retrieval, or JSON schema.</p>
+      <p>Preview a sample WhatsApp message before n8n runs it live.</p>
+    </section>
+
+    <section class="slide" data-slide="OpenProject">
+      <h1>OpenProject — source of truth</h1>
+      <p class="lead">Every accepted bug, feature, and follow-up lives here. Unmapped WhatsApp work lands in WhatsApp Queue (project 14).</p>
+      <div class="row">
+        <a class="open primary" href="https://projects.drpaws.ai" target="_blank" rel="noopener">Open OpenProject</a>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="Open all">
+      <h1>Open every console</h1>
+      <p class="lead">Use these public links during the demo. Localhost is the fallback on this machine.</p>
+      <table>
+        <tr><th>Platform</th><th>Website</th></tr>
+        <tr><td>Evolution</td><td><a href="https://evolution.drpaws.ai/manager" target="_blank" rel="noopener">https://evolution.drpaws.ai/manager</a></td></tr>
+        <tr><td>Chatwoot</td><td><a href="https://inbox.drpaws.ai/app/accounts/2/dashboard" target="_blank" rel="noopener">https://inbox.drpaws.ai</a></td></tr>
+        <tr><td>Dify</td><td><a href="https://dify.drpaws.ai/apps" target="_blank" rel="noopener">https://dify.drpaws.ai/apps</a></td></tr>
+        <tr><td>n8n</td><td><a href="https://automation.drpaws.ai" target="_blank" rel="noopener">https://automation.drpaws.ai</a></td></tr>
+        <tr><td>OpenProject</td><td><a href="https://projects.drpaws.ai" target="_blank" rel="noopener">https://projects.drpaws.ai</a></td></tr>
+      </table>
+      <div class="row">
+        <a class="open primary" href="https://evolution.drpaws.ai/manager" target="_blank" rel="noopener">Evolution</a>
+        <a class="open primary" href="https://inbox.drpaws.ai/app/accounts/2/dashboard" target="_blank" rel="noopener">Chatwoot</a>
+        <a class="open primary" href="https://dify.drpaws.ai/apps" target="_blank" rel="noopener">Dify</a>
+        <a class="open primary" href="https://automation.drpaws.ai" target="_blank" rel="noopener">n8n</a>
+        <a class="open primary" href="https://projects.drpaws.ai" target="_blank" rel="noopener">OpenProject</a>
+      </div>
+    </section>
+  </div>
+  <div class="hint">← → or click a tab</div>
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    const nav = document.getElementById("nav");
+    let i = 0;
+    slides.forEach((s, idx) => {
+      const b = document.createElement("button");
+      b.textContent = s.dataset.slide;
+      b.onclick = () => show(idx);
+      nav.appendChild(b);
+    });
+    const prev = document.createElement("button");
+    prev.textContent = "Previous";
+    prev.onclick = () => show(i - 1);
+    const next = document.createElement("button");
+    next.textContent = "Next";
+    next.onclick = () => show(i + 1);
+    const spacer = document.createElement("span");
+    spacer.className = "spacer";
+    nav.appendChild(spacer);
+    nav.appendChild(prev);
+    nav.appendChild(next);
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, idx) => s.classList.toggle("on", idx === i));
+      [...nav.querySelectorAll("button")].forEach((b, idx) => {
+        if (idx < slides.length) b.classList.toggle("active", idx === i);
+      });
+    }
+    show(0);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); show(i + 1); }
+      if (e.key === "ArrowLeft") show(i - 1);
+    });
+  </script>
+</body>
+</html>
